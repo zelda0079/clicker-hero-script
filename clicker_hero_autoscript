@@ -57,7 +57,7 @@ Sub hero //英雄升級
 
 End Sub
 
-Sub skill //使用技能, 個人習慣(攻擊系1, 2, 3, 7...賺錢系 4, 8->5, 9給5或是6用)
+Sub skill //使用技能, 個人習慣(攻擊系1, 2, 3, 7...賺錢系 4, 8->5, 9給5或是6用)  這邊沒判斷是否CD中或是持續中, 效果沒那麼好
 	Call Plugin.Bkgnd.KeyPress(Hwnd, 97)//1
 	Call Plugin.Bkgnd.KeyPress(Hwnd, 98)//2
 	Call Plugin.Bkgnd.KeyPress(Hwnd, 99)//3
@@ -74,7 +74,7 @@ End Sub
 
 Sub findfish  //找橙色魚, 測試功能
 
-XY = Plugin.Bkgnd.FindColorEx(Hwnd, 0, 0, 1100, 600, "005BE6", 0, 0.99)  
+XY = Plugin.Bkgnd.FindColorEx(Hwnd, 0, 0, 1100, 600, "003EE5", 0, 0.97)  
 dim MyArray  
 MyArray = Split(XY, "|")  
 X = Clng(MyArray(0)) : Y = Clng(MyArray(1))
