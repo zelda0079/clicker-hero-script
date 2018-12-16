@@ -1,0 +1,62 @@
+//clicker hero 開局升英雄+技能
+//先點擊自動過版(轉生後會默認農怪)
+//自動把英雄升至200LV以上, 最後點擊1次過升技能
+
+
+
+Hwnd = Plugin.Window.Find(0, "Clicker Heroes")
+Call windows//改變視窗大小
+Call Plugin.Window.Top(Hwnd, 1)//讓遊戲置前 0  取消 1
+  
+Call hero_upgrage
+
+
+
+
+
+//副程式區
+
+
+
+Sub windows//改變視窗大小
+  Call Plugin.Window.Size(Hwnd, 1100, 600)  //默認視窗1100*600
+  Call Plugin.Window.Move(Hwnd, 0, 0)   //移到最左上角
+  Delay 1000
+End Sub
+
+Sub hero_upgrage//英雄升級
+	Call Plugin.Bkgnd.LeftClick(Hwnd, 84, 88)//英雄頁面
+		Delay 200
+	For j = 1 To 10
+		Call Plugin.Bkgnd.LeftClick(Hwnd, 526, 185)//上拉
+		Delay 30
+	Next
+
+	Call Plugin.Bkgnd.KeyDown(Hwnd, 17)//CTRL, 按住
+	For i=1 to 2
+		Call Plugin.Bkgnd.LeftClick(Hwnd, 120, 210)//升英雄
+		Delay 20
+		Call Plugin.Bkgnd.LeftClick(Hwnd, 120, 300)//升英雄
+		Delay 20	
+		Call Plugin.Bkgnd.LeftClick(Hwnd, 120, 390)//升英雄
+		Delay 20
+		Call Plugin.Bkgnd.LeftClick(Hwnd, 120, 480)//升英雄
+		Delay 20
+	Next
+	
+	For j = 1 To 100
+		Call Plugin.Bkgnd.LeftClick(Hwnd, 526, 549)//下拉
+		Delay 50
+		Call Plugin.Bkgnd.LeftClick(Hwnd, 120, 320)//升英雄
+		Delay 20
+		Call Plugin.Bkgnd.LeftClick(Hwnd, 120, 320)//升英雄
+		Delay 20
+		Call Plugin.Bkgnd.LeftClick(Hwnd, 120, 270)//升英雄
+		Delay 20
+		Call Plugin.Bkgnd.LeftClick(Hwnd, 120, 270)//升英雄
+		Delay 20
+	Next
+	
+	Call Plugin.Bkgnd.LeftClick(Hwnd, 360, 480)//升技能
+	Call Plugin.Bkgnd.KeyUp(Hwnd, 17)//CTRL, 放開
+End Sub
