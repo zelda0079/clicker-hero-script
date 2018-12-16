@@ -74,7 +74,7 @@ End Sub
 
 Sub findfish  //找橙色魚, 測試功能
 Dim MyArray
-findfishfunction ("003EE5")
+findfishfunction ("003EE5")  //需要持續增加顏色抽樣, 以應對更多情況
 findfishfunction ("0B5DFF")
 
 End Sub
