@@ -73,18 +73,21 @@ Sub skill //使用技能, 個人習慣(攻擊系1, 2, 3, 7...賺錢系 4, 8->5, 
 End Sub
 
 Sub findfish  //找橙色魚, 測試功能
-
-XY = Plugin.Bkgnd.FindColorEx(Hwnd, 0, 0, 1100, 600, "003EE5", 0, 0.97)  
-dim MyArray  
-MyArray = Split(XY, "|")  
-X = Clng(MyArray(0)) : Y = Clng(MyArray(1))
-
-
-//Msgbox "後臺視窗顏色X座標="& X & "    Y座標=" & Y     //(測試用語句)
-Call Plugin.Bkgnd.LeftClick(Hwnd, X, Y)//點擊魚
-
+Dim MyArray
+findfishfunction ("003EE5")
+findfishfunction ("0B5DFF")
 
 End Sub
+
+
+Function findfishfunction(color1)
+XY = Plugin.Bkgnd.FindColorEx(Hwnd, 0, 0, 1100, 600, color1, 0, 0.97)  
+	MyArray = Split(XY, "|") 
+	X = Clng(MyArray(0)) : Y = Clng(MyArray(1))
+	//Msgbox "後臺視窗顏色X座標="& X & "    Y座標=" & Y     //(測試用語句)
+	Call Plugin.Bkgnd.LeftClick(Hwnd, X, Y)//點擊魚
+End Function
+//定義一個函數,可以在腳本中調用這個函數，支持參數和返回值
 
 
 Sub autoclick //自動點擊, 可能介面會卡頓
