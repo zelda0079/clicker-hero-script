@@ -8,7 +8,7 @@ Dim skill_time//經過多少次自動點擊後使用1次技能, 單位次數
 Dim click_interval //多少毫秒點一次
 
 autoclick_time = 10000//設定每次進行10秒autoclick, 每單位=10秒
-skill_time =6 //設定每次進行6*10秒升級技能, 6次自動點擊後使用1次技能
+skill_time =6 //設定每次進行N*10秒升級技能, N次自動點擊後使用1次技能
 click_interval =33 //33毫秒點1次, 大約1秒進行30次點擊, 再多會卡屏@@
 
 
@@ -23,7 +23,7 @@ For i = 1 To 500
 	
 	Call skill
 	Call findfish
-	For k=1 to skill_time  //6*10秒
+	For k=1 to skill_time  //N*10秒
 		Call hero
 		Call autoclick
 	Next
@@ -44,9 +44,10 @@ Sub windows//改變視窗大小
 End Sub
 
 Sub hero //英雄升級
-	Call Plugin.Bkgnd.LeftClick(Hwnd, 84, 88) //英雄頁面
+	Call Plugin.Bkgnd.LeftClick(Hwnd, 84, 88)//英雄頁面
+		Delay 30
 	For j = 1 To 5
-			Call Plugin.Bkgnd.LeftClick(Hwnd, 525, 515)//拉到最底
+			Call Plugin.Bkgnd.LeftClick(Hwnd, 524, 524)//拉到最底
 		Delay 30
 	Next
 	Call Plugin.Bkgnd.KeyDown(Hwnd, 81)//Q, 按住
@@ -70,7 +71,7 @@ Sub skill //使用技能, 個人習慣(攻擊系1, 2, 3, 7...賺錢系 4, 8->5, 
 	
 	Call Plugin.Bkgnd.KeyPress(Hwnd, 102)//6
 	Call Plugin.Bkgnd.KeyPress(Hwnd, 105)//9
-      
+	Delay 500
 End Sub
 
 Sub findfish  //找橙色魚, 測試功能
@@ -78,17 +79,21 @@ Dim MyArray
 findfishfunction ("003EE5")  //持續顏色增加樣本中
 findfishfunction ("0B5DFF")
 findfishfunction ("0951ED")
+findfishfunction ("0247E7")
+findfishfunction ("0340E8")
+
 
 
 End Sub
 
 
 Function findfishfunction(color1)
-XY = Plugin.Bkgnd.FindColorEx(Hwnd, 0, 0, 1100, 600, color1, 0, 0.97)  
+	XY = Plugin.Bkgnd.FindColorEx(Hwnd, 0, 0, 1100, 600, color1, 0, 0.98)  
 	MyArray = Split(XY, "|") 
 	X = Clng(MyArray(0)) : Y = Clng(MyArray(1))
 	//Msgbox "後臺視窗顏色X座標="& X & "    Y座標=" & Y     //(測試用語句)
 	Call Plugin.Bkgnd.LeftClick(Hwnd, X, Y)//點擊魚
+	Delay 500
 End Function
 //定義一個函數,可以在腳本中調用這個函數，支持參數和返回值
 
@@ -98,4 +103,5 @@ Sub autoclick //自動點擊, 可能介面會卡頓
 		Call Plugin.Bkgnd.LeftClick(Hwnd, 910, 430)//自動點擊功能, 老手只用自動點擊手的話, 可以註解這行
 		Delay click_interval
 	Next
+	Delay 200
 End Sub
