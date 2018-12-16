@@ -20,7 +20,7 @@ clicker hero自動腳本V1 by zelda  2018/12/16
 所以這邊可能會亂用@@
 
 
-clicker hero 開局升英雄+技能V1 by zelda  2018/12/16
+clicker hero 開局升英雄+技能V2 by zelda  2018/12/16
 
 注意事項:
 腳本迴圈設定為1, 只需要執行1次
@@ -31,6 +31,11 @@ clicker hero 開局升英雄+技能V1 by zelda  2018/12/16
 
 先點擊自動過版(轉生後會默認農怪)
 自動把英雄升至200LV以上, 最後點擊1次過升技能
+
+版本歷史
+V1:本身
+V2:加了自動點擊手賺錢, 才有錢升英雄技能
+
 
 
 感謝https://forum.gamer.com.tw/C.php?bsn=27423&snA=384 提供腳本開發的參考資料
