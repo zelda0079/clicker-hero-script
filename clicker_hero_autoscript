@@ -5,10 +5,11 @@
 
 Dim autoclick_time//每單位自動點擊的時間, 單位毫秒
 Dim skill_time//經過多少次自動點擊後使用1次技能, 單位次數
+Dim click_interval //多少毫秒點一次
 
 autoclick_time = 10000//設定每次進行10秒autoclick, 每單位=10秒
 skill_time =6 //設定每次進行6*10秒升級技能, 6次自動點擊後使用1次技能
-
+click_interval =33 //33毫秒點1次, 大約1秒進行30次點擊, 再多會卡屏@@
 
 
 
@@ -74,8 +75,10 @@ End Sub
 
 Sub findfish  //找橙色魚, 測試功能
 Dim MyArray
-findfishfunction ("003EE5")  //需要持續增加顏色抽樣, 以應對更多情況
+findfishfunction ("003EE5")
 findfishfunction ("0B5DFF")
+findfishfunction ("0951ED")
+
 
 End Sub
 
@@ -91,8 +94,8 @@ End Function
 
 
 Sub autoclick //自動點擊, 可能介面會卡頓
-	For j = 1 To Clng(autoclick_time/30)  //10秒
+	For j = 1 To Clng(autoclick_time/click_interval)  //10秒
 		Call Plugin.Bkgnd.LeftClick(Hwnd, 910, 430)//自動點擊功能, 老手只用自動點擊手的話, 可以註解這行
-		Delay 30
+		Delay click_interval
 	Next
 End Sub
