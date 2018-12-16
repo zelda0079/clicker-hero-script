@@ -1,0 +1,95 @@
+//clicker hero自動腳本V1 by zelda   date:2018/12/16
+//默認10秒為單位自動點擊
+//每次自動點擊完成會升級一次英雄
+//每6次就使用(或檢查)1次技能
+
+Dim autoclick_time//每單位自動點擊的時間, 單位毫秒
+Dim skill_time//經過多少次自動點擊後使用1次技能, 單位次數
+
+autoclick_time = 10000//設定每次進行10秒autoclick, 每單位=10秒
+skill_time =6 //設定每次進行6*10秒升級技能, 6次自動點擊後使用1次技能
+
+
+
+
+Hwnd = Plugin.Window.Find(0, "Clicker Heroes")
+Call windows//改變視窗大小
+ Call Plugin.Window.Top(Hwnd, 1)//讓遊戲置前 0  取消 1
+  
+Rem start //設計GG標記
+
+For i = 1 To 500
+	
+	Call skill
+	Call findfish
+	For k=1 to skill_time  //6*10秒
+		Call hero
+		Call autoclick
+	Next
+Next
+Goto start//前往GG標記繼續執行
+
+
+
+
+//副程式區
+
+
+
+Sub windows//改變視窗大小
+  Call Plugin.Window.Size(Hwnd, 1100, 600)  //默認視窗1100*600
+  Call Plugin.Window.Move(Hwnd, 0, 0)   //移到最左上角
+  Delay 1000
+End Sub
+
+Sub hero //英雄升級
+	Call Plugin.Bkgnd.LeftClick(Hwnd, 84, 88) //英雄頁面
+	For j = 1 To 5
+			Call Plugin.Bkgnd.LeftClick(Hwnd, 525, 515)//拉到最底
+		Delay 30
+	Next
+	Call Plugin.Bkgnd.KeyDown(Hwnd, 81)//Q, 按住
+	Delay 30
+	Call Plugin.Bkgnd.LeftClick(Hwnd, 130, 320)//升級
+	Delay 30
+	Call Plugin.Bkgnd.KeyUp(Hwnd, 81)//Q, 放開
+	Delay 30
+
+End Sub
+
+Sub skill //使用技能, 個人習慣(攻擊系1, 2, 3, 7...賺錢系 4, 8->5, 9給5或是6用)
+	Call Plugin.Bkgnd.KeyPress(Hwnd, 97)//1
+	Call Plugin.Bkgnd.KeyPress(Hwnd, 98)//2
+	Call Plugin.Bkgnd.KeyPress(Hwnd, 99)//3
+	Call Plugin.Bkgnd.KeyPress(Hwnd, 103)//7
+		
+	Call Plugin.Bkgnd.KeyPress(Hwnd, 100)//4
+	Call Plugin.Bkgnd.KeyPress(Hwnd, 104)//8
+	Call Plugin.Bkgnd.KeyPress(Hwnd, 101)//5
+	
+	Call Plugin.Bkgnd.KeyPress(Hwnd, 102)//6
+	Call Plugin.Bkgnd.KeyPress(Hwnd, 105)//9
+      
+End Sub
+
+Sub findfish  //找橙色魚, 測試功能
+
+XY = Plugin.Bkgnd.FindColorEx(Hwnd, 0, 0, 1100, 600, "005BE6", 0, 0.99)  
+dim MyArray  
+MyArray = Split(XY, "|")  
+X = Clng(MyArray(0)) : Y = Clng(MyArray(1))
+
+
+//Msgbox "後臺視窗顏色X座標="& X & "    Y座標=" & Y     //(測試用語句)
+Call Plugin.Bkgnd.LeftClick(Hwnd, X, Y)//點擊魚
+
+
+End Sub
+
+
+Sub autoclick //自動點擊, 可能介面會卡頓
+	For j = 1 To Clng(autoclick_time/30)  //10秒
+		Call Plugin.Bkgnd.LeftClick(Hwnd, 910, 430)//自動點擊功能, 老手只用自動點擊手的話, 可以註解這行
+		Delay 30
+	Next
+End Sub
