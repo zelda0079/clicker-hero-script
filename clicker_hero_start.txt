@@ -1,8 +1,6 @@
-//clicker hero 開局升英雄+技能
+//clicker hero 開局升英雄+技能 by zelda
 //先點擊自動過版(轉生後會默認農怪)
 //自動把英雄升至200LV以上, 最後點擊1次過升技能
-
-
 
 Hwnd = Plugin.Window.Find(0, "Clicker Heroes")
 Call windows//改變視窗大小
@@ -26,13 +24,16 @@ End Sub
 
 Sub hero_upgrage//英雄升級
 	Call Plugin.Bkgnd.LeftClick(Hwnd, 84, 88)//英雄頁面
+	Call Plugin.Bkgnd.LeftClick(Hwnd, 1015, 175)//解除農怪
 		Delay 200
 	For j = 1 To 10
 		Call Plugin.Bkgnd.LeftClick(Hwnd, 526, 185)//上拉
 		Delay 30
 	Next
-
+	Delay 1000
+	
 	Call Plugin.Bkgnd.KeyDown(Hwnd, 17)//CTRL, 按住
+	Delay 100
 	For i=1 to 2
 		Call Plugin.Bkgnd.LeftClick(Hwnd, 120, 210)//升英雄
 		Delay 20
@@ -50,11 +51,15 @@ Sub hero_upgrage//英雄升級
 		Call Plugin.Bkgnd.LeftClick(Hwnd, 120, 320)//升英雄
 		Delay 20
 		Call Plugin.Bkgnd.LeftClick(Hwnd, 120, 320)//升英雄
-		Delay 20
+		Delay 50
 		Call Plugin.Bkgnd.LeftClick(Hwnd, 120, 270)//升英雄
 		Delay 20
 		Call Plugin.Bkgnd.LeftClick(Hwnd, 120, 270)//升英雄
+		Delay 50
+		Call Plugin.Bkgnd.LeftClick(Hwnd, 120, 220)//升英雄
 		Delay 20
+		Call Plugin.Bkgnd.LeftClick(Hwnd, 120, 220)//升英雄
+		Delay 50
 	Next
 	
 	Call Plugin.Bkgnd.LeftClick(Hwnd, 360, 480)//升技能
