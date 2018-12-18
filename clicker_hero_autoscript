@@ -1,4 +1,4 @@
-//clicker hero自動腳本V1 by zelda   date:2018/12/16
+//clicker hero自動腳本V1.1 by zelda   date:2018/12/19
 //默認10秒為單位自動點擊
 //每次自動點擊完成會升級一次英雄
 //每6次就使用(或檢查)1次技能
@@ -6,6 +6,8 @@
 Dim autoclick_time//每單位自動點擊的時間, 單位毫秒
 Dim skill_time//經過多少次自動點擊後使用1次技能, 單位次數
 Dim click_interval //多少毫秒點一次
+
+
 
 autoclick_time = 10000//設定每次進行10秒autoclick, 每單位=10秒
 skill_time =6 //設定每次進行N*10秒升級技能, N次自動點擊後使用1次技能
@@ -26,6 +28,7 @@ For i = 1 To 500
 	For k=1 to skill_time  //N*10秒
 		Call hero
 		Call autoclick
+		Delay 5000
 	Next
 Next
 Goto start//前往GG標記繼續執行
@@ -71,16 +74,18 @@ Sub skill //使用技能, 個人習慣(攻擊系1, 2, 3, 7...賺錢系 4, 8->5, 
 	
 	Call Plugin.Bkgnd.KeyPress(Hwnd, 102)//6
 	Call Plugin.Bkgnd.KeyPress(Hwnd, 105)//9
-	Delay 500
+	Delay 1000
 End Sub
 
 Sub findfish  //找橙色魚, 測試功能
-Dim MyArray
+
 findfishfunction ("003EE5")  //持續顏色增加樣本中
 findfishfunction ("0B5DFF")
 findfishfunction ("0951ED")
-findfishfunction ("0247E7")
-findfishfunction ("0340E8")
+findfishfunction ("1454E9")
+findfishfunction ("105EFE")
+findfishfunction ("067BFF")
+findfishfunction ("0044EF")
 
 
 
@@ -88,12 +93,24 @@ End Sub
 
 
 Function findfishfunction(color1)
-	XY = Plugin.Bkgnd.FindColorEx(Hwnd, 0, 0, 1100, 600, color1, 0, 0.99)  
-	MyArray = Split(XY, "|") 
-	X = Clng(MyArray(0)) : Y = Clng(MyArray(1))
-	//Msgbox "後臺視窗顏色X座標="& X & "    Y座標=" & Y     //(測試用語句)
-	Call Plugin.Bkgnd.LeftClick(Hwnd, X, Y)//點擊魚
-	Delay 500
+	Dim MyArray
+	For i = 1 To 5
+		XY = Plugin.Bkgnd.FindColorEx(Hwnd, 0, 0, 1200, 700, color1, 0, 0.99)  
+		MyArray = Split(XY, "|") 
+		X = Clng(MyArray(0)) : Y = Clng(MyArray(1))
+		If X <> - 1  Then 
+		i=5
+		//Msgbox "後臺視窗顏色X座標="& X & "    Y座標=" & Y &"color="& color1    //(測試用語句)
+			For j=1 to 5
+				Call Plugin.Bkgnd.LeftClick(Hwnd, X, Y)//點擊魚
+				Delay 20
+			Next
+		End If
+		Delay 100
+	Next
+	Delay 1000
+	
+
 End Function
 //定義一個函數,可以在腳本中調用這個函數，支持參數和返回值
 
@@ -103,5 +120,4 @@ Sub autoclick //自動點擊, 可能介面會卡頓
 		Call Plugin.Bkgnd.LeftClick(Hwnd, 910, 430)//自動點擊功能, 老手只用自動點擊手的話, 可以註解這行
 		Delay click_interval
 	Next
-	Delay 200
 End Sub
