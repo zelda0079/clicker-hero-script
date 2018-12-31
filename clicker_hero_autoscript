@@ -1,4 +1,4 @@
-//clicker hero自動腳本V1.1 by zelda   date:2018/12/19
+//clicker hero自動腳本V1.2 by zelda   date:2018/12/19
 //默認10秒為單位自動點擊
 //每次自動點擊完成會升級一次英雄
 //每6次就使用(或檢查)1次技能
@@ -22,9 +22,9 @@ Call windows//改變視窗大小
 Rem start //設計GG標記
 
 For i = 1 To 500
-	
-	Call skill
 	Call findfish
+	Rem endfish
+	Call skill
 	For k=1 to skill_time  //N*10秒
 		Call hero
 		Call autoclick
@@ -48,7 +48,7 @@ End Sub
 
 Sub hero //英雄升級
 	Call Plugin.Bkgnd.LeftClick(Hwnd, 84, 88)//英雄頁面
-		Delay 30
+		Delay 100
 	For j = 1 To 5
 			Call Plugin.Bkgnd.LeftClick(Hwnd, 524, 524)//拉到最底
 		Delay 50
@@ -64,28 +64,40 @@ End Sub
 
 Sub skill //使用技能, 個人習慣(攻擊系1, 2, 3, 7...賺錢系 4, 8->5, 9給5或是6用)  這邊沒判斷是否CD中或是持續中, 效果沒那麼好
 	Call Plugin.Bkgnd.KeyPress(Hwnd, 97)//1
+	Delay 100
 	Call Plugin.Bkgnd.KeyPress(Hwnd, 98)//2
+	Delay 100
 	Call Plugin.Bkgnd.KeyPress(Hwnd, 99)//3
+	Delay 100
 	Call Plugin.Bkgnd.KeyPress(Hwnd, 103)//7
-		
-	Call Plugin.Bkgnd.KeyPress(Hwnd, 100)//4
-	Call Plugin.Bkgnd.KeyPress(Hwnd, 104)//8
-	Call Plugin.Bkgnd.KeyPress(Hwnd, 101)//5
+	Delay 100
 	
+	Call Plugin.Bkgnd.KeyPress(Hwnd, 100)//4
+	Delay 100
+	Call Plugin.Bkgnd.KeyPress(Hwnd, 104)//8
+	Delay 100
+	Call Plugin.Bkgnd.KeyPress(Hwnd, 101)//5
+	Delay 100
 	Call Plugin.Bkgnd.KeyPress(Hwnd, 102)//6
+	Delay 100
 	Call Plugin.Bkgnd.KeyPress(Hwnd, 105)//9
 	Delay 1000
 End Sub
 
 Sub findfish  //找橙色魚, 測試功能
 
-findfishfunction ("003EE5")  //持續顏色增加樣本中
+findfishfunction ("054CEA")//持續顏色增加樣本中
+findfishfunction ("014AF7")
+findfishfunction ("1652FF")  
+findfishfunction ("003EE5")  
 findfishfunction ("0B5DFF")
 findfishfunction ("0951ED")
 findfishfunction ("1454E9")
 findfishfunction ("105EFE")
 findfishfunction ("067BFF")
 findfishfunction ("0044EF")
+findfishfunction ("1A59FA")
+
 
 
 
@@ -94,19 +106,16 @@ End Sub
 
 Function findfishfunction(color1)
 	Dim MyArray
-	For i = 1 To 5
+	For i = 1 To 7
 		XY = Plugin.Bkgnd.FindColorEx(Hwnd, 0, 0, 1200, 700, color1, 0, 0.99)  
 		MyArray = Split(XY, "|") 
 		X = Clng(MyArray(0)) : Y = Clng(MyArray(1))
 		If X <> - 1  Then 
-		i=5
-		//Msgbox "後臺視窗顏色X座標="& X & "    Y座標=" & Y &"color="& color1    //(測試用語句)
-			For j=1 to 5
-				Call Plugin.Bkgnd.LeftClick(Hwnd, X, Y)//點擊魚
-				Delay 20
-			Next
+			i=7
+			//Msgbox "X="& X &"Y=" & Y &"color="& color1    //(測試用語句)
+			Call Plugin.Bkgnd.LeftClick(Hwnd, X, Y)//點擊魚
+			Goto endfish
 		End If
-		Delay 100
 	Next
 	Delay 1000
 	
