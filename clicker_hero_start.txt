@@ -67,7 +67,9 @@ Sub hero_upgrage//英雄升級
 	Call Plugin.Bkgnd.LeftClick(Hwnd, 360, 480)//升技能
 	Call Plugin.Bkgnd.KeyUp(Hwnd, 81)//Q, 放開
 	
-	autoclick(auto_clicker)
+	If auto_clicker>1 then
+		autoclick (auto_clicker)
+	End If
 	
 End Sub
 
