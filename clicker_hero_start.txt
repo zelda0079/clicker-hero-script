@@ -1,7 +1,10 @@
-//clicker hero 開局升英雄+技能 V2 by zelda
+//clicker hero 開局升英雄+升技能+拉點擊手 V2.1 by zelda 2019/1/1
 //先點擊自動過版(轉生後會默認農怪)
 //自動把英雄升至200LV以上, 最後點擊1次過升技能
 //請確認自身有足夠轉生和超越可以開局點滿英雄到200LV
+Dim auto_clicker
+auto_clicker = InputBox("輸入自動點擊手數量/enter the number of auto clicker")
+auto_clicker = Cint(auto_clicker)
 
 Hwnd = Plugin.Window.Find(0, "Clicker Heroes")
 Call windows//改變視窗大小
@@ -28,12 +31,8 @@ Sub hero_upgrage//英雄升級
 	Delay 100
 	Call Plugin.Bkgnd.LeftClick(Hwnd, 1015, 175)//解除農怪
 	Delay 200
-	Call Plugin.Bkgnd.LeftDown(Hwnd, 1000, 300)//拉自動手
-	Delay 500
-	Call Plugin.Bkgnd.MoveTo(Hwnd, 800, 400)//移到怪上
-	Delay 100
-	Call Plugin.Bkgnd.LeftUp(Hwnd, 800, 400)//放開
-	Delay 100
+	
+	autoclick(2)
 	
 	Delay 5000  //賺一下錢, 如果賺錢能力差考慮增加時間, 老手不般不會
 	
@@ -67,4 +66,20 @@ Sub hero_upgrage//英雄升級
 	
 	Call Plugin.Bkgnd.LeftClick(Hwnd, 360, 480)//升技能
 	Call Plugin.Bkgnd.KeyUp(Hwnd, 81)//Q, 放開
+	
+	autoclick(auto_clicker)
+	
 End Sub
+
+
+
+Function autoclick(ak)
+	For i =1 to ak -1
+		Call Plugin.Bkgnd.LeftDown(Hwnd, 1000, 300)//拉自動手
+		Delay 50
+		Call Plugin.Bkgnd.MoveTo(Hwnd, 800, 400)//移到怪上
+		Delay 50
+		Call Plugin.Bkgnd.LeftUp(Hwnd, 800, 400)//放開
+		Delay 50
+	Next
+End Function
