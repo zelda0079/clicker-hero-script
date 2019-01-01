@@ -27,7 +27,7 @@ For i = 1 To 500
 	For k=1 to skill_time  //N*10秒
 		Call hero
 		Call autoclick
-		Delay 5000
+		Delay 1000
 	Next
 Next
 Goto start//前往GG標記繼續執行
