@@ -1,5 +1,6 @@
-//clicker hero(no click版)自動腳本V1.4 by zelda   date:2019/1/19
-//默認10秒為單位進行1次找魚和升級英雄
+//clicker hero自動腳本V1.3 by zelda   date:2019/11/1
+//默認10秒為單位自動點擊
+//每次自動點擊完成會升級一次英雄
 //每6次就使用(或檢查)1次技能
 
 Dim autoclick_time//每單位自動點擊的時間, 單位毫秒
@@ -20,15 +21,14 @@ Call windows//改變視窗大小
 Rem start //設計GG標記
 
 For i = 1 To 500
-
+	Call findfish
+	Rem endfish
 	Call skill
 	For k=1 to skill_time  //N*10秒
 		Call hero
-		Call findfish
-		Rem endfish
-		Delay 10000
+		Call autoclick
+		Delay 1000
 	Next
-	
 Next
 Goto start//前往GG標記繼續執行
 
@@ -49,30 +49,15 @@ Sub hero //英雄升級
 	Call Plugin.Bkgnd.LeftClick(Hwnd, 84, 88)//英雄頁面
 		Delay 100
 	For j = 1 To 5
-			Call Plugin.Bkgnd.LeftClick(Hwnd, 524, 535)//拉到最底
-		Delay 100
+			Call Plugin.Bkgnd.LeftClick(Hwnd, 524, 524)//拉到最底
+		Delay 50
 	Next
-	Delay 200
-	Call Plugin.Bkgnd.LeftClick(Hwnd, 370, 480)//升技能
-	Delay 200
-	For j = 1 To 2
-		Call Plugin.Bkgnd.LeftClick(Hwnd, 525, 170)//拉上兩下
-		Delay 100
-	Next
-	Delay 200
-	
 	Call Plugin.Bkgnd.KeyDown(Hwnd, 81)//Q, 按住
-	Delay 200
-	Call Plugin.Bkgnd.LeftClick(Hwnd, 130, 510)//升級
-	Delay 200
-	Call Plugin.Bkgnd.LeftClick(Hwnd, 130, 420)//升級
 	Delay 200
 	Call Plugin.Bkgnd.LeftClick(Hwnd, 130, 320)//升級
 	Delay 200
-	Call Plugin.Bkgnd.LeftClick(Hwnd, 130, 230)//升級
-	Delay 200
 	Call Plugin.Bkgnd.KeyUp(Hwnd, 81)//Q, 放開
-
+	Delay 200
 
 End Sub
 
@@ -83,51 +68,44 @@ If GetColor1 = "DBFFFF"  Then
 	Call Plugin.Bkgnd.KeyPress(Hwnd, 49) //1
 	Delay 100
 End If
-Delay 200
-
+  
 GetColor1 = Plugin.Bkgnd.GetPixelColor(Hwnd, 575, 192) //CD完按下2
 If GetColor1 = "6464FF"  Then
 	Call Plugin.Bkgnd.KeyPress(Hwnd, 50) //2
 	Delay 100
 End If
-Delay 200
 
-GetColor1 = Plugin.Bkgnd.GetPixelColor(Hwnd, 575, 237)//CD完按下3
+GetColor1 = Plugin.Bkgnd.GetPixelColor(Hwnd, 575, 237) //CD完按下3
 If GetColor1 = "B5BBBB"  Then
 	Call Plugin.Bkgnd.KeyPress(Hwnd, 51) //3
 	Delay 100
 End If
-Delay 200
 
-GetColor1 = Plugin.Bkgnd.GetPixelColor(Hwnd, 575, 282)//CD完按下4
+GetColor1 = Plugin.Bkgnd.GetPixelColor(Hwnd, 575, 282) //CD完按下4
 If GetColor1 = "96FFFF"  Then
 	Call Plugin.Bkgnd.KeyPress(Hwnd, 52) //4
 	Delay 100
 End If
-Delay 200
 
-GetColor1 = Plugin.Bkgnd.GetPixelColor(Hwnd, 575, 415)//CD完按下7
+GetColor1 = Plugin.Bkgnd.GetPixelColor(Hwnd, 575, 415) //CD完按下7
 If GetColor1 = "2632E8"  Then
 	Call Plugin.Bkgnd.KeyPress(Hwnd, 55) //7
 	Delay 100
 End If
-Delay 200
 
-GetColor1 = Plugin.Bkgnd.GetPixelColor(Hwnd, 575, 364) //6 CD完按6再按9
-GetColor2 = Plugin.Bkgnd.GetPixelColor(Hwnd, 575, 507)//判斷9
-Delay 50
-If GetColor1 = "0099FF" and GetColor2 = "2A2A7C" Then  //只要8或是5 CD完, 就用, 通常是一起CD完, 有時例外
+GetColor1 = Plugin.Bkgnd.GetPixelColor(Hwnd, 575, 369) //6 CD完按6再按9
+GetColor2 = Plugin.Bkgnd.GetPixelColor(Hwnd, 575, 507) //判斷9
+If GetColor1 = "2F9EF4" and GetColor2 = "2A2A7C" Then  //只要8或是5 CD完, 就用, 通常是一起CD完, 有時例外
 	Call Plugin.Bkgnd.KeyPress(Hwnd, 54) //6
 	Delay 100
 	Call Plugin.Bkgnd.KeyPress(Hwnd, 57) //9    //新手可註釋這行
 	Delay 100
 End If
-Delay 200
+
 
 GetColor1 = Plugin.Bkgnd.GetPixelColor(Hwnd, 575, 464) //8 CD完按8再按5
-GetColor2 = Plugin.Bkgnd.GetPixelColor(Hwnd, 575, 327)//判斷5
-Delay 50
-If GetColor1 = "FEDE92" or GetColor2 = "00D5F0" Then  //只要8或是5 CD完, 就用, 通常是一起CD完, 有時例外
+GetColor2 = Plugin.Bkgnd.GetPixelColor(Hwnd, 575, 327) //判斷5
+If GetColor1 = "FEDE92" or GetColor2 = "D5F0" Then  //只要8或是5 CD完, 就用, 通常是一起CD完, 有時例外
 	Call Plugin.Bkgnd.KeyPress(Hwnd, 56) //8
 	Delay 100
 	Call Plugin.Bkgnd.KeyPress(Hwnd, 53) //5
@@ -135,18 +113,14 @@ If GetColor1 = "FEDE92" or GetColor2 = "00D5F0" Then  //只要8或是5 CD完, �
 	Call Plugin.Bkgnd.KeyPress(Hwnd, 57) //9  //老手可註釋這行
 	Delay 100
 End If
-Delay 200
 
 End Sub
 
 
 Sub findfish  //找橙色魚, 測試功能
 
-findfishfunction ("0061EF")//持續顏色增加樣本中
-findfishfunction ("0C67FF")
-findfishfunction ("1857E7")
-findfishfunction ("0E73FD")
-findfishfunction ("0047F3")
+
+findfishfunction ("0047F3")//持續顏色增加樣本中
 findfishfunction ("054CEA")
 findfishfunction ("014AF7")
 findfishfunction ("1652FF")  
@@ -161,17 +135,19 @@ findfishfunction ("1A59FA")
 
 
 
+
+
 End Sub
 
 
 Function findfishfunction(color1)
 	Dim MyArray
-	For i = 1 To 10
+	For i = 1 To 7
 		XY = Plugin.Bkgnd.FindColorEx(Hwnd, 0, 0, 1200, 700, color1, 0, 0.99)  
 		MyArray = Split(XY, "|") 
 		X = Clng(MyArray(0)) : Y = Clng(MyArray(1))
 		If X <> - 1  Then 
-			i=10
+			i=7
 			//Msgbox "X="& X &"Y=" & Y &"color="& color1    //(測試用語句)
 			Call Plugin.Bkgnd.LeftClick(Hwnd, X, Y)//點擊魚
 			Goto endfish
@@ -184,3 +160,9 @@ End Function
 //定義一個函數,可以在腳本中調用這個函數，支持參數和返回值
 
 
+Sub autoclick //自動點擊, 可能介面會卡頓
+	For j = 1 To Clng(autoclick_time/click_interval)  //10秒
+		Call Plugin.Bkgnd.LeftClick(Hwnd, 910, 430)//自動點擊功能, 老手只用自動點擊手的話, 可以註解這行
+		Delay click_interval
+	Next
+End Sub
