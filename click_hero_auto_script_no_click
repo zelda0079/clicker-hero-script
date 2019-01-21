@@ -82,7 +82,7 @@ Sub hero //英雄升級
 End Sub
 
 Sub skill
-Msgbox "TEST"
+
 GetColor1 = Plugin.Bkgnd.GetPixelColor(Hwnd, 575, 146) //CD完按下1
 If GetColor1 = "DBFFFF"  Then
 	Call Plugin.Bkgnd.KeyPress(Hwnd, 49) //1
