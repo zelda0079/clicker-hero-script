@@ -1,4 +1,4 @@
-//clicker hero自動腳本V1.5 新年特別版 by zelda   date:2019/2/2
+//clicker hero自動腳本V1.51 情人節特別版 by zelda   date:2019/2/13
 //默認10秒為單位自動點擊
 //每次自動點擊完成會升級一次英雄
 //每6次就使用(或檢查)1次技能
@@ -150,8 +150,10 @@ Sub findfish  //找橙色魚, 測試功能
 
 
 //持續顏色增加樣本中
+//心心
+findfishfunction ("3D3DDE")
 //紅包
-findfishfunction ("031BDE")
+//findfishfunction ("031BDE")
 //橙魚
 findfishfunction ("006EF1")
 findfishfunction ("074DED")
